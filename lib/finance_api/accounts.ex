@@ -69,7 +69,7 @@ defmodule FinanceApi.Accounts do
   """
   def update_user(%User{} = user, attrs) do
     user
-    |> User.changeset(attrs)
+    |> User.update_changeset(attrs)
     |> Repo.update()
   end
 
@@ -100,5 +100,9 @@ defmodule FinanceApi.Accounts do
   """
   def change_user(%User{} = user, attrs \\ %{}) do
     User.changeset(user, attrs)
+  end
+
+  def get_user_by_email(email) do
+    Repo.get_by(User, email: email)
   end
 end

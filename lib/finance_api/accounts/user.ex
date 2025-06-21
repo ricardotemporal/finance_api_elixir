@@ -29,4 +29,10 @@ defmodule FinanceApi.Accounts.User do
       password -> put_change(changeset, :password_hash, Bcrypt.hash_pwd_salt(password))
     end
   end
+
+  def update_changeset(user, attrs) do
+    user
+    |> cast(attrs, [:name, :email])
+    |> validate_required([:name, :email])
+  end
 end
