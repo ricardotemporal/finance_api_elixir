@@ -22,6 +22,10 @@ config :finance_api, FinanceApiWeb.Endpoint,
   pubsub_server: FinanceApi.PubSub,
   live_view: [signing_salt: "J2IFs0Kq"]
 
+config :finance_api, FinanceApi.Guardian,
+  issuer: "finance_api",
+  secret_key: "GtptgGnPhDyWwMmCUhEGfC4eNBAvlFmqQvRUamJhnb+PMmhYCqsn1uJf3pehUB8j"
+
 # Configures the mailer
 #
 # By default it uses the "Local" adapter which stores the emails
@@ -31,7 +35,7 @@ config :finance_api, FinanceApiWeb.Endpoint,
 # at the `config/runtime.exs`.
 config :finance_api, FinanceApi.Mailer, adapter: Swoosh.Adapters.Local
 
-# Configures Elixir's Logger
+# Configures Elixir's Loggerz
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
   metadata: [:request_id]
