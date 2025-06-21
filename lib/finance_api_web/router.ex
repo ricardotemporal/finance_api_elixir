@@ -8,8 +8,17 @@ defmodule FinanceApiWeb.Router do
   scope "/api", FinanceApiWeb do
     pipe_through :api
 
-    resources "/users", UserController, except: [:new, :edit]
+    post "/login", AuthController, :login
+    post "/users", UserController, :create
+
+    scope "/" do
+      pipe_through FinanceApiWeb.AuthPipeline
+
+      resources "/users", UserController, except: [:new, :edit, :create]
+      resources "/transactions", TransactionController, except: [:new, :edit]
+    end
   end
+
 
   # Enable LiveDashboard and Swoosh mailbox preview in development
   if Application.compile_env(:finance_api, :dev_routes) do
